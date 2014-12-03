@@ -1,0 +1,53 @@
+<ion-view title="Home">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header cus-bg">
+    
+      <div class="temp" ng-controller="CardsController">
+      <div class="card" ng-repeat='i in repeat'>
+          <div class="card-header">
+               <img src="http://codians.com/img/raman.PNG" class="circle" id="user-pic" />
+             <span id="user-name"> Raman Choudhary</span>
+              
+              <div class="card-option-btn">
+             
+                  
+                  </div>
+              </a>
+          </div>
+          
+         
+          
+  <div class="item item-text-wrap">
+    <p id="card-msg" ng-class="{'card-msg-adj': i.showClass == true}">           
+        {{msg}}
+        
+        <div class="fadder">      
+            <span id="see-more" ng-click="showMore(i);">see more</span>
+        </div>
+        
+        <br/>
+        <br/>
+        <time><i class="ion-clock"></i>&nbsp; 3 hrs ago</time>
+          </p>
+<!--
+      <div class="card-panel">
+      <a href="" class="card-control-btn">
+        Button
+      </a>
+      <a href="" class="card-control-btn">
+        Button
+      </a>
+      <a href="" class="card-control-btn">
+        Button
+      </a>
+      </div>
+-->
+  </div>
+</div>
+          </div>
+      
+      
+  </ion-content>
+</ion-view>

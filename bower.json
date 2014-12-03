@@ -1,0 +1,23 @@
+{
+  "name": "CSA APP",
+  "private": true,
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.13"
+  },
+  "version": "0.0.1",
+  "authors": [
+    "Raman Choudhary <raman.choudhary65@gmail.com>"
+  ],
+  "description": "App build for CSA, Christ University.",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "www.codians.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "www/lib",
+    "test",
+    "tests"
+  ]
+}
