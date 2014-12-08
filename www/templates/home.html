@@ -4,49 +4,48 @@
   </ion-nav-buttons>
   <ion-content class="has-header cus-bg">
     
-      <div class="temp" ng-controller="CardsController">
-      <div class="card" ng-repeat='i in repeat'>
-          <div class="card-header">
-               <img src="http://codians.com/img/raman.PNG" class="circle" id="user-pic" />
-             <span id="user-name"> Raman Choudhary</span>
-              
-              <div class="card-option-btn">
-             
-                  
+      <div class="temp">
+        <div class="card" ng-repeat='m in messages'>
+
+            <div class="card-header">
+               <img ng-src="{{m.picture}}" class="circle" id="user-pic" />
+               <span id="user-name">{{m.name}}</span>
+                
+                <div class="card-option-btn">
+                </div>
+            </div> 
+
+              <div class="item item-text-wrap">
+                <p id="card-msg" ng-class="{'card-msg-adj': m.showClass == true}">           
+                    <span ng-bind-html="m.message | to_trusted"></span>
+                    <div class="fadder-disabled hide">      
+                        <span id="see-more" ng-click="showMore(m);">see more</span>
+                    </div>
+                    
+                      <small>
+                        <i class="ion-clock"></i>&nbsp; 
+                        <span am-time-ago="{{m.timestamped | timeInSeconds}}">
+                          {{m.timestamped}}
+                        </span>
+                      </small>
+                    
+                </p>
+            <!--
+                  <div class="card-panel">
+                  <a href="" class="card-control-btn">
+                    Button
+                  </a>
+                  <a href="" class="card-control-btn">
+                    Button
+                  </a>
+                  <a href="" class="card-control-btn">
+                    Button
+                  </a>
                   </div>
-              </a>
+            -->
+              </div>
           </div>
-          
-         
-          
-  <div class="item item-text-wrap">
-    <p id="card-msg" ng-class="{'card-msg-adj': i.showClass == true}">           
-        {{msg}}
-        
-        <div class="fadder">      
-            <span id="see-more" ng-click="showMore(i);">see more</span>
-        </div>
-        
-        <br/>
-        <br/>
-        <time><i class="ion-clock"></i>&nbsp; 3 hrs ago</time>
-          </p>
-<!--
-      <div class="card-panel">
-      <a href="" class="card-control-btn">
-        Button
-      </a>
-      <a href="" class="card-control-btn">
-        Button
-      </a>
-      <a href="" class="card-control-btn">
-        Button
-      </a>
       </div>
--->
-  </div>
-</div>
-          </div>
       
       
   </ion-content>
