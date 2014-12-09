@@ -46,9 +46,9 @@ angular.module('starter.controllers', ['angularMoment', 'phonecatFilters'])
 
   // lets fetch the list of all events
   $http({
-      url: 'http://10.0.2.2/fabian/csa-api/events.php',
+      url: 'http://csa.codians.com/events.php',
       method: "POST",
-      data: {'token': 'ass'}
+      data: {'token': ''}
     }).success(function (data, status, headers, config) {
         // we got data from the server
         if(data.response && data.response == "success") {
@@ -74,7 +74,11 @@ angular.module('starter.controllers', ['angularMoment', 'phonecatFilters'])
         if(data.responseMessage != undefined) {
           $scope.error = data.responseMessage;
         } else {
-          $scope.error = JSON.stringify(data);
+          if(data == "") {
+            $scope.error = "Could not connect to the server";
+          } else {
+            $scope.error = JSON.stringify(data);
+          }
         }
     });
 })
