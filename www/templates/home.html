@@ -5,11 +5,33 @@
   <ion-content class="has-header cus-bg">
     
       <div class="temp">
+        <div ng-show='messages.length == 0 && fetching == false && error == null' class='card-panel'>
+          <a class="item" href="#">
+            <i class="icon ion-close-circled"></i>
+            No events yet.
+          </a>
+        </div>
+
+        <div ng-show='messages.length == 0 && fetching == true && error == null' class='card-panel'>
+          <a class="item" href="#">
+            <i class="icon ion-refresh"></i>
+            Fetching list of events...
+          </a>
+        </div>
+
+        <div ng-show='error != null' class='card-panel'>
+          <a class="item" href="#">
+            <i class="icon ion-alert-circled"></i>&nbsp;An error occurred
+            <br /><span class='red'>{{error}}</span>
+          </a>
+        </div>
+
         <div class="card" ng-repeat='m in messages'>
 
             <div class="card-header">
-               <img ng-src="{{m.picture}}" class="circle" id="user-pic" />
-               <span id="user-name">{{m.name}}</span>
+               <img ng-src="{{m.picture || defaultPicture}}" class="circle" id="user-pic" />
+               <span id="user-name">{{m.title}}</span>
+
                 
                 <div class="card-option-btn">
                 </div>
@@ -17,12 +39,12 @@
 
               <div class="item item-text-wrap">
                 <p id="card-msg" ng-class="{'card-msg-adj': m.showClass == true}">           
-                    <span ng-bind-html="m.message | to_trusted"></span>
-                    <div class="fadder-disabled hide">      
-                        <span id="see-more" ng-click="showMore(m);">see more</span>
-                    </div>
+                    <span ng-bind-html="m.description | to_trusted"></span>
+                    <br />
+                    <strong>Venue:</strong>&nbsp;{{m.venue}}<br />
                     
-                      <small>
+
+                      <br /><small>
                         <i class="ion-clock"></i>&nbsp; 
                         <span am-time-ago="{{m.timestamped | timeInSeconds}}">
                           {{m.timestamped}}

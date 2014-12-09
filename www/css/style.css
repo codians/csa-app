@@ -82,7 +82,7 @@ background: #e8e8e8;
 #card-msg{
     margin-top: 0px;
     padding-top: 20px;
-    max-height: 170px;
+    /*max-height: 170px;*/
     overflow-x: hidden;
     
 /*    background: rgba(255,0,0,0.5);*/
@@ -137,4 +137,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
     margin-right: auto;
 }
 
-.card .user
+.va-image {
+    vertical-align: middle;
+}
+
+.red {
+    color: #c0392b;
+}

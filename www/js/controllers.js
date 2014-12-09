@@ -14,7 +14,7 @@ angular.module('starter.controllers', ['angularMoment', 'phonecatFilters'])
 
 .controller('LoginController', function($scope, $state) {
   // check if the user is logged in
-  if(window.localStorage.getItem("isLoggedIn") == true) {
+  if((window.localStorage.getItem("isLoggedIn") == true) || !loginRequired) {
     $state.transitionTo("app.home");
   }
 
@@ -30,42 +30,53 @@ angular.module('starter.controllers', ['angularMoment', 'phonecatFilters'])
   }
 })
 
-.controller('CardsController', function($scope, $state) {
+.controller('CardsController', function($scope, $state, $http) {
   // check if the user is logged in
-  if(!(window.localStorage.getItem("isLoggedIn") == true)) {
+  if((!(window.localStorage.getItem("isLoggedIn") == true)) && loginRequired) {
     $state.transitionTo("app.login");
   }
 
   // list of all messages
-  $scope.messages = [
-    {
-      'showClass': false, 
-      "name": "Trisanki Saikia", 
-      'message': "CSA General Meeting Tomorrow<br />Date: 8th December 2014<br />Day: Monday<br />Time: 4 pm<br />Venue: CSA Office", 
-      "picture": "img/user.png",
-      "timestamped": "1417958668"
-    },{
-      'showClass': false, 
-      "name": "Anshula Shankar", 
-      'message': "Good job today guys! Day one of Prayatana 2014 was a great success!<br />Follow the official CSA Instagram account : csa.christ<br />Follow the official CSA Twitter account: @CSA_Christ", 
-      "picture": "img/user.png",
-      "timestamped": "1417958668"
-    },{
-      'showClass': false, 
-      "name": "Anumathi Malak", 
-      'message': "Hi... Good evening... Prayatna(waste management program), Daksh and Gracias are the events comming up soon.... so its time to spend some time in csa office.... see you all there after 4....", 
-      "picture": "img/user.png",
-      "timestamped": "1417958668"
-    }
-  ];
-  
-  // what happens when show more is clicked?
-  $scope.showMore = function(card){
-       card.showClass = true;        
-       console.log(card);          
-        //fade out fadder div 
-        
-  };
+  $scope.messages = [];
+  $scope.fetching = true;
+  $scope.error = null;
+
+  // defaults
+  $scope.defaultPicture = "img/user.png";
+
+  // lets fetch the list of all events
+  $http({
+      url: 'http://10.0.2.2/fabian/csa-api/events.php',
+      method: "POST",
+      data: {'token': 'ass'}
+    }).success(function (data, status, headers, config) {
+        // we got data from the server
+        if(data.response && data.response == "success") {
+          // we got data from the server
+          $scope.fetching = false;  
+          $scope.messages = data.data;
+        } else {
+          // an error occurred
+          $scope.fetching = false;
+
+          // was there a response message?
+          if(data.responseMessage != undefined) {
+            $scope.error = data.responseMessage;
+          } else {
+            $scope.error = JSON.stringify(data);
+          }
+        }
+    }).error(function (data, status, headers, config) {
+        // an error occurred
+        $scope.fetching = false;
+
+        // was there a response message?
+        if(data.responseMessage != undefined) {
+          $scope.error = data.responseMessage;
+        } else {
+          $scope.error = JSON.stringify(data);
+        }
+    });
 })
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
