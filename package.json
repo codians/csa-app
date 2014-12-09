@@ -1,7 +1,7 @@
 {
   "name": "csa-ss",
   "version": "1.0.0",
-  "description": "csa-ss: An Ionic project",
+  "description": "Christ University - CSA & Me",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",
